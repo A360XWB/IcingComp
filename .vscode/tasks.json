@@ -1,0 +1,49 @@
+{
+    "version":"2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "dependsOn": [
+                "make build dir",
+                "compile"
+            ],
+            "dependsOrder": "sequence",
+            "group":{
+                "kind": "build",
+                "isDefault": true
+            }   
+        },
+
+        {
+            "label": "make build dir",
+            "type": "shell",
+            "command": "cmd",
+            "args": [ 
+                "/C",
+                "if not exist .\\build mkdir build"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+
+        {
+            "label": "compile",
+            "type": "shell",
+            "command": "gfortran",
+            //"problemMatcher": [],
+            "args":[
+                    "-g",
+                    "${workspaceFolder}/readDPM.f95",
+                    "-o",
+                    "${workspaceFolder}/build/readDPM.exe"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            
+        }
+    ]
+}
