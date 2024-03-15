@@ -35,12 +35,14 @@ program readDPM
         exit
       else if (string(i:i) >= '0' .and. string(i:i) <= '9') then
         properties_C = string(i : i + 9)
+        write(*, *) properties_C
         call my_incr(i, 9)
       else if (string(i:i) == '-') then
         properties_C = string(i : i + 10)
+        write(*, *) properties_C
         call my_incr(i, 10)
       end if
-      write(*, *) properties_C
+      !write(*, *) properties_C
     end do
   end do
 !777 continue
