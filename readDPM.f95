@@ -5,10 +5,12 @@ program readDPM
   integer :: iostat, i, len_str
   character(len = 500) :: string
   character(len = 20) :: properties_C
-
+  real*8 :: properties 
+  !dimension properties (0 : num_col, 0 : num_row)
+  
   ! Store properties from xyz, uvw, diameter, t, parcel-mass, mass, n-in-parcel, time, to flow time
-  real*8 properties   ! 13 properties in total
-  dimension properties (0 : num_col, 0 : num_row)
+  ! 13 properties in total
+
 
   ! Open the file for reading
   open(unit = 10, file = filename, status = 'old', action = 'read', iostat = iostat)
@@ -35,19 +37,24 @@ program readDPM
         exit
       else if (string(i:i) >= '0' .and. string(i:i) <= '9') then
         properties_C = string(i : i + 9)
-        write(*, *) properties_C
+        read(properties_C, *) properties
+        write(*, *) properties
+        !write(*, *) properties_C
         call my_incr(i, 9)
       else if (string(i:i) == '-') then
         properties_C = string(i : i + 10)
-        write(*, *) properties_C
+        read(properties_C, *) properties
+        write(*, *) properties
+        !write(*, *) properties_C
         call my_incr(i, 10)
       end if
-      !write(*, *) properties_C
     end do
   end do
 !777 continue
   ! Close the file
   close(10)
+
+
 end program readDPM
 
 subroutine my_incr(var, incr)
