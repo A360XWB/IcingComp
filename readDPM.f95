@@ -5,9 +5,14 @@ program readDPM
   integer :: iostat, i, j, k, len_str
   character(len = 500) :: string
   character(len = 20) :: properties_C
+<<<<<<< HEAD
   
   real :: properties 
   dimension properties (0 : num_row, 0 : num_col)
+=======
+  real*8 :: properties 
+  !dimension properties (0 : num_col, 0 : num_row)
+>>>>>>> e0001016d8e5dd7c17143fb3386e8c8038ee0098
   
   ! Store properties from xyz, uvw, diameter, t, parcel-mass, mass, n-in-parcel, time, to flow time
   ! 13 properties in total
@@ -41,16 +46,31 @@ program readDPM
         exit
       else if (string(i:i) >= '0' .and. string(i:i) <= '9') then
         properties_C = string(i : i + 9)
+<<<<<<< HEAD
         read(properties_C, *) properties (j, k)
+=======
+        read(properties_C, *) properties
+        write(*, *) properties
+        !write(*, *) properties_C
+>>>>>>> e0001016d8e5dd7c17143fb3386e8c8038ee0098
         call my_incr(i, 9)
         call my_incr(k, 1)
       else if (string(i:i) == '-') then
         properties_C = string(i : i + 10)
+<<<<<<< HEAD
         read(properties_C, *) properties (j, k)
+=======
+        read(properties_C, *) properties
+        write(*, *) properties
+        !write(*, *) properties_C
+>>>>>>> e0001016d8e5dd7c17143fb3386e8c8038ee0098
         call my_incr(i, 10)
         call my_incr(k, 1)
       end if
+<<<<<<< HEAD
       !write(*, *) i, j, k, ' element: ', properties_C 
+=======
+>>>>>>> e0001016d8e5dd7c17143fb3386e8c8038ee0098
     end do
     call my_incr(j, 1)
   end do
@@ -58,6 +78,7 @@ program readDPM
   ! Close the file
   close(10)
 
+<<<<<<< HEAD
 do i = 0, 30
   do k = 0, num_col
     write(*, *) 'P(', i, ', ', k, ') = ', properties(i, k)    
@@ -65,6 +86,8 @@ do i = 0, 30
 end do
 
 !write(*, *) 'P(0, 5) * P(0, 6) = ', properties(0, 5) * properties(0, 6)
+=======
+>>>>>>> e0001016d8e5dd7c17143fb3386e8c8038ee0098
 
 end program readDPM
 
